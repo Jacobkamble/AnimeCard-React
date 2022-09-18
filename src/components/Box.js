@@ -35,7 +35,7 @@ export default function Box() {
 
     return (
         <>
-            <div className="container my-5">
+            <div className="container mt-5">
                 <div className="row">
                     {result.map((element, index) => {
                         return <BoxItems key={element.mal_id} title={element.title}
@@ -45,7 +45,7 @@ export default function Box() {
                     })}
                     <div className="d-flex justify-content-between">
                         <button className={`btn btn-dark mx-2 my-1 ${page <= 0 ? "disableds" : ""}`} onClick={handlePrevious}>Previous</button>
-                        <p className='text-center'><strong>{page}</strong></p>
+                        <p className='text-center text-light'><strong>{page}</strong></p>
                         <button className={`btn btn-dark mx-2 my-1 `} onClick={handleNext}>Next</button>
                     </div>
                 </div>

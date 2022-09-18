@@ -1,14 +1,14 @@
-// import React from 'react'
 import AnimeContext from "../context/animeContext";
-import { useEffect,useContext } from "react";
+import { useEffect, useContext } from "react";
 import BoxItems from "./BoxItems";
 
 export default function Search(props) {
-    const context=useContext(AnimeContext);
-    const {result,fetchData}=context;
+    const context = useContext(AnimeContext);
+    const { result, fetchData } = context;
 
     useEffect(() => {
         fetchData();
+        //eslint-disable-next-line
     }, []);
 
     return (

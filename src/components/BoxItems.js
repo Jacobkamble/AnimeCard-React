@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { useState } from 'react';
-import {Link } from 'react-router-dom';
+import React, { useContext,useState } from 'react'
+import { Link } from 'react-router-dom';
 import AnimeContext from '../context/animeContext';
 
 export default function BoxItems(props) {
@@ -9,25 +8,30 @@ export default function BoxItems(props) {
     const [check, setCheck] = useState(false)
 
 
-    // const removeDuplicate = (arr, key) => {
+    const removeDuplicate = (arr, key) => {
 
-    //     let jsonObject = arr.map(JSON.stringify);
-    //     let uniqueSet = new Set(jsonObject);
-    //     let newArr = Array.from(uniqueSet).map(JSON.parse);
-    //     return newArr;
-    // }
+        let jsonObject = arr.map(JSON.stringify);
+        let uniqueSet = new Set(jsonObject);
+        let newArr = Array.from(uniqueSet).map(JSON.parse);
+        return newArr;
+    }
+
+    const saveToLocalStorage = (item) => {
+        localStorage.setItem("anime-watchlist", JSON.stringify(item));
+    }
 
     const addWatch = async (e) => {
 
         setCheck(true);
-        await setWatchlist(
-            watchlist.concat({
-                title: props.title,
-                rating: props.rating,
-                genres: props.genres,
-                image: props.img
-            })
-        )
+        const newWatchlist = [...watchlist.concat({
+            title: props.title, rating: props.rating,
+            genres: props.genres, image: props.img
+        })
+        ];
+        setWatchlist(newWatchlist);
+
+        const uqique = removeDuplicate(newWatchlist, "title");
+        saveToLocalStorage(uqique);
     }
     const findIndex = (e) => {
         setIndex(props.index);
@@ -35,7 +39,7 @@ export default function BoxItems(props) {
 
     return (
         <>
-            <div className="col-md-4 my-5">
+            <div className="col-md-4 my-2">
                 <div className="card" >
                     <img src={props.img} style={{ height: "25rem" }} className="card-img-top" alt="..." />
                     <div className="card-body">

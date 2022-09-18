@@ -1,21 +1,20 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react';
 import AnimeContext from '../context/animeContext';
 import WatchListCard from './WatchListCard';
 
 export default function Watchlist() {
 
   const context = useContext(AnimeContext);
-  const { watchlist } = context;
+  const { watchlist, setWatchlist } = context;
 
-  // const removeDuplicate = (arr, key) => {
+  useEffect(() => {
 
-  //   let jsonObject = arr.map(JSON.stringify);
-  //   let uniqueSet = new Set(jsonObject);
-  //   let newArr = Array.from(uniqueSet).map(JSON.parse);
-  //   return newArr;
-  // }
-
-  //  let uniq=removeDuplicate(watchlist);
+    const myWatchlist = JSON.parse(localStorage.getItem("anime-watchlist"));
+    if (myWatchlist) {
+      setWatchlist(myWatchlist);
+    }
+//eslint-disable-next-line
+  },[])
 
   return (
     <>
